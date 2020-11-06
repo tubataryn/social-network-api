@@ -29,6 +29,7 @@ const thoughtController = {
     },
     // create a thought
     createThought(req, res) {
+        console.log("body POST", req.body)
         Thought.create(req.body)
         .then((dbThoughtData) => {
             return User.findOneAndUpdate(

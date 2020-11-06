@@ -15,7 +15,7 @@ const userController = {
     },
     //get single user by id
     getSingleUser(req, res) {
-        userController.findOne({ _id: req.params.userId })
+        User.findOne({ _id: req.params.userId })
         .select('-__v')
         .populate('friends')
         .populate('thoughts')
@@ -65,7 +65,7 @@ const userController = {
     // delete user and associated thoughts
     deleteUser(req, res) {
         User.findOneAndDelete({ _id: req.params.userId })
-        .then((dataUser) => {
+        .then((dbUserData) => {
             if (!dbUserData) {
                 return res.status(404).json({ message: 'No user with this Id!' });
             }
